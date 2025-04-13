@@ -1,0 +1,10 @@
+services:
+    scheduler:
+        volumes:
+        - /home/charles/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
+    webserver:
+        volumes:
+        - /home/charles/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
+    triggerer:
+        volumes:
+        - /home/charles/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw

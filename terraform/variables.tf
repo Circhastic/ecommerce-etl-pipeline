@@ -20,12 +20,12 @@ variable "location" {
 
 variable "bq_dataset_name" {
   description = "BigQuery Dataset Name"
-  default     = "fecom_dataset"
+  default     = "ecom_dataset"
 }
 
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
-  default     = "zoomcamp-project-455714-fecom-bucket"
+  default     = "zoomcamp-project-455714-ecom-bucket"
 }
 
 variable "gcs_storage_class" {
