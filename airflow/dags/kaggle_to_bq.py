@@ -65,7 +65,7 @@ GCS_BQ_SCHEMA_FIELDS=[
     schedule="@monthly",
     catchup=True,
     tags=["kaggle", "gcs", "bigquery", "ecommerce", "consolidated"],
-    max_active_runs=3,
+    max_active_runs=1,
     is_paused_upon_creation=False,
     default_args={
         'retries': 1,
