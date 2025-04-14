@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: ecom_source
+    database: "{{ env_var('GCP_PROJECT_ID', 'zoomcamp-project-455714') }}"
+    schema: "{{ env_var('BQ_DATASET', 'ecom_dataset') }}"
+    tables:
+      - name: ecom_events
+        description: "Consolidated table of raw ecommerce events loaded monthly via Airflow."
+        columns:
+          - name: event_time
+            description: "Timestamp of the event."
+            tests:
+              - not_null
+          - name: event_type
+            description: "Type of event (e.g., view, cart, purchase)."
+          - name: product_id
+            description: "Identifier for the product."
+            tests:
+              - not_null
+          - name: category_id
+            description: "Identifier for the product category."
+          - name: category_code
+            description: "Category code or path string."
+          - name: brand
+            description: "Brand name of the product."
+          - name: price
+            description: "Price of the product at the time of the event."
+          - name: user_id
+            description: "Identifier for the user."
+            tests:
+              - not_null
+          - name: user_session
+            description: "Identifier for the user's session."
+            tests:
+              - not_null

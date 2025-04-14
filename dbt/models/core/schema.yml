@@ -1,0 +1,91 @@
+version: 2
+
+models:
+  - name: dim_datetime
+    description: "Dimension table with date and time attributes derived from event timestamps."
+    columns:
+      - name: datetime_sk
+        description: "Surrogate key for the datetime dimension."
+        tests:
+          - unique
+          - not_null
+      - name: datetime_hour_utc
+        description: "Timestamp truncated to the hour (UTC)."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_products
+    description: "Dimension table containing product attributes."
+    columns:
+      - name: product_sk
+        description: "Surrogate key for the product dimension."
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Natural key for the product (source system ID)."
+        tests:
+          - unique # Assuming product_id uniquely identifies a product in this dim
+          - not_null
+      - name: product_brand
+        description: "Brand name of the product."
+        tests:
+          - not_null
+
+  - name: dim_users
+    description: "Dimension table containing user attributes."
+    columns:
+      - name: user_sk
+        description: "Surrogate key for the user dimension."
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "Natural key for the user (source system ID)."
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_events
+    description: "Fact table recording user interaction events (view, cart, purchase)."
+    columns:
+      - name: event_sk
+        description: "Surrogate key for the event fact record."
+        tests:
+          - unique
+          - not_null
+      - name: product_sk
+        description: "Foreign key to the product dimension."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_sk
+      - name: user_sk
+        description: "Foreign key to the user dimension."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_users')
+              field: user_sk
+      - name: datetime_sk
+        description: "Foreign key to the datetime dimension."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_datetime')
+              field: datetime_sk
+      - name: event_type
+        description: "Type of event (view, cart, remove_from_cart, purchase)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['view', 'cart', 'remove_from_cart', 'purchase']
+      - name: event_price
+        description: "Price of the product at the time of the event."
+        # Add not_null test if price is always expected for certain event_types like purchase
+      - name: event_at_utc
+        description: "Timestamp when the event occurred (UTC)."
+        tests:
+          - not_null
