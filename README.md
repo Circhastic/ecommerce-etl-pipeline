@@ -1,5 +1,4 @@
-# E-commerce Data Pipeline and Visualization
-
+# E-commerce Events Data Pipeline and Analysis
 A data engineering project
 
 ## Technologies
@@ -7,5 +6,4 @@ A data engineering project
 - Workflow Orchestration: Python/Airflow
 - Data Lake: Google Cloud Storage (GCS)
 - Data Warehouse: Google BigQuery + dbt
-- Batch Processing: Spark
-- Data Visualization: Looker Studio (or maybe Power BI)
+- Data Visualization: Google Looker Studio
