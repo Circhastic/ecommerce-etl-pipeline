@@ -1,5 +1,5 @@
 # E-commerce Events Data Pipeline and Analysis
-A data engineering project
+A data engineering project (wip)
 
 ## Technologies
 - IaC: Terraform
