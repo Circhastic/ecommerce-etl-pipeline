@@ -1,9 +1,9 @@
 FROM quay.io/astronomer/astro-runtime:12.7.1
 
-USER root
+RUN python -m venv dbt_venv && source dbt_venv/bin/activate && \
+    pip install --no-cache-dir dbt-bigquery && deactivate
 
-# Install required packages
-RUN pip install kaggle apache-airflow-providers-google
+USER root
 
 # Copy Kaggle credentials
 RUN mkdir -p /home/astro/.kaggle

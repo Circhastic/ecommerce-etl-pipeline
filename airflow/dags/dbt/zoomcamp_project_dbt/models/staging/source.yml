@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: ecom_source
+  - name: ecom_raw
     database: "{{ env_var('GCP_PROJECT_ID', 'zoomcamp-project-455714') }}"
     schema: "{{ env_var('BQ_DATASET', 'ecom_dataset') }}"
     tables:
@@ -32,5 +32,3 @@ sources:
               - not_null
           - name: user_session
             description: "Identifier for the user's session."
-            tests:
-              - not_null

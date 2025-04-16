@@ -1,0 +1,14 @@
+zoomcamp_project_dbt:
+  outputs:
+    dev:
+      dataset: ecom_dataset
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: /usr/local/airflow/gcloud/project_creds.json
+      location: asia-southeast1
+      method: service-account
+      priority: interactive
+      project: zoomcamp-project-455714
+      threads: 4
+      type: bigquery
+  target: dev

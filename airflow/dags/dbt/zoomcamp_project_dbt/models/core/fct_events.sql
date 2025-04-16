@@ -16,8 +16,6 @@ with stg_events as (
     select * from {{ ref('stg_ecom_events') }}
 
     {% if is_incremental() %}
-    -- this filter will only be applied on an incremental run
-    -- fetch events occurred since the last run
     where event_at_utc > (select max(event_at_utc) from {{ this }})
     {% endif %}
 ),
@@ -35,13 +33,15 @@ dim_datetime as (
 )
 
 select
-    dp.product_sk,
-    du.user_sk,
-    dd.datetime_sk,
+    coalesce(dp.product_sk, '-1') as product_sk,
+    coalesce(du.user_sk, '-1') as user_sk,
+    coalesce(dd.datetime_sk, '-1') as datetime_sk,
+
     se.event_type,
     se.user_session_id,
     se.event_price,
     se.event_at_utc,
+
     se.event_sk
 
 from stg_events se
