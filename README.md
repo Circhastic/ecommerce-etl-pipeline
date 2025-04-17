@@ -18,7 +18,7 @@ Kaggle Dataset can be found [here](https://www.kaggle.com/datasets/mkechinov/eco
 - Data Visualization: Looker Studio
 
 ## Data Pipeline
-![data pipeline](./images/pipeline.png)
+![data pipeline](./images/de_pipeline.png)
 
 ## Reproducibility
 ### Requirements
