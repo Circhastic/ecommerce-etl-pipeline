@@ -8,13 +8,13 @@ terraform {
 }
 
 provider "google" {
-  # credentials = file(var.credentials) - I used GOOGLE_APPLICATION_CREDENTIALS env variable
-  project     = var.project             # your project id seen in the GCP console
+  # credentials = file(var.credentials) - I used GOOGLE_APPLICATION_CREDENTIALS env variable (default), you can use this if you want
+  project     = var.project
   region      = var.region
 }
 
 resource "google_storage_bucket" "main-bucket" {
-  name          = var.gcs_bucket_name # must be unique across your gcp account
+  name          = var.gcs_bucket_name # must be unique
   location      = var.location
   force_destroy = true
 

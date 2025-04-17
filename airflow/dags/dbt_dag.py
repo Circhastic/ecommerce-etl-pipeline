@@ -6,12 +6,12 @@ from airflow.utils.dates import days_ago
 from airflow.datasets import Dataset
 from cosmos import DbtDag, ProjectConfig, ProfileConfig, ExecutionConfig
 
-BQ_PROJECT_ID = "zoomcamp-project-455714" #! IMPORTANT: Ensure consistency
-BQ_DATASET = "ecom_dataset"             #! IMPORTANT: Ensure consistency (source dataset)
-BQ_CONSOLIDATED_TABLE_NAME = "ecom_events" #! IMPORTANT: Ensure consistency
+BQ_PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT_ID", "zoomcamp-project-455714")
+BQ_DATASET = os.getenv("BQ_DATASET", "ecom_dataset")
+BQ_CONSOLIDATED_TABLE_NAME = os.getenv("BQ_CONSOLIDATED_TABLE", "ecom_events")
 
-DBT_PROJECT_PATH = "/usr/local/airflow/dags/dbt/zoomcamp_project_dbt" # CHANGE ME
-DBT_PROFILES_YML_PATH = "/usr/local/airflow/dags/dbt_profiles/profiles.yml" # CHANGE ME
+DBT_PROJECT_PATH = "/usr/local/airflow/dags/dbt/zoomcamp_project_dbt"
+DBT_PROFILES_YML_PATH = "/usr/local/airflow/dags/dbt_profiles/profiles.yml"
 DBT_EXECUTABLE_PATH = "/usr/local/airflow/dbt_venv/bin/dbt"
 
 ecom_events_dataset = Dataset(f"bigquery://{BQ_PROJECT_ID}/{BQ_DATASET}/{BQ_CONSOLIDATED_TABLE_NAME}")

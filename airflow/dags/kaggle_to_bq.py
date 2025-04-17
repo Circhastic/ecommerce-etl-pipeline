@@ -6,21 +6,23 @@ from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
 from airflow.datasets import Dataset
+# from airflow.models.baseoperator import chain
 
 from google.cloud import storage
 from kaggle.api.kaggle_api_extended import KaggleApi
 
-KAGGLE_DATASET = "mkechinov/ecommerce-events-history-in-cosmetics-shop"
+
+GCS_BUCKET = os.getenv("GCS_BUCKET_NAME", "zoomcamp-project-455714-ecom-bucket")
+BQ_PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT_ID", "zoomcamp-project-455714")
+
+KAGGLE_DATASET = os.getenv("KAGGLE_DATASET_PATH", "mkechinov/ecommerce-events-history-in-cosmetics-shop")
+GCS_DESTINATION_PREFIX = os.getenv("GCS_DEST_PREFIX", "ecommerce_events")
+BQ_DATASET = os.getenv("BQ_DATASET", "ecom_dataset")
+BQ_STAGING_TABLE_NAME = os.getenv("BQ_STAGING_TABLE", "ecom_staging")
+BQ_CONSOLIDATED_TABLE_NAME = os.getenv("BQ_CONSOLIDATED_TABLE", "ecom_events")
+GCP_CONN_ID = os.getenv("GCP_CONNECTION_ID", "google_cloud_default")
+
 DOWNLOAD_DIR = os.environ.get("AIRFLOW_TMP_DIR", "/tmp/ecommerce_data")
-GCS_BUCKET = "zoomcamp-project-455714-ecom-bucket" #! IMPORTANT: Replace
-GCS_DESTINATION_PREFIX = "ecommerce_events"
-
-BQ_PROJECT_ID = "zoomcamp-project-455714" #! IMPORTANT: Replace
-BQ_DATASET = "ecom_dataset"             #! IMPORTANT: Replace
-BQ_STAGING_TABLE_NAME = "ecom_staging"
-BQ_CONSOLIDATED_TABLE_NAME = "ecom_events"
-GCP_CONN_ID = "google_cloud_default"
-
 MONTH_REVERSE_MAP = { "01": "Jan", "02": "Feb", "03": "Mar", "04": "Apr", "05": "May", "06": "Jun", "07": "Jul", "08": "Aug", "09": "Sep", "10": "Oct", "11": "Nov", "12": "Dec" }
 BIGQUERY_SCHEMA_DEFINITION = "event_time TIMESTAMP, event_type STRING, product_id INT64, category_id BIGNUMERIC, category_code STRING, brand STRING, price FLOAT64, user_id INT64, user_session STRING"
 CREATE_CONSOLIDATED_TABLE_SQL = f"CREATE TABLE IF NOT EXISTS `{BQ_PROJECT_ID}.{BQ_DATASET}.{BQ_CONSOLIDATED_TABLE_NAME}`({BIGQUERY_SCHEMA_DEFINITION}) PARTITION BY DATE(event_time) CLUSTER BY product_id, user_id;"
@@ -31,6 +33,7 @@ ecom_events_dataset = Dataset(f"bigquery://{BQ_PROJECT_ID}/{BQ_DATASET}/{BQ_CONS
 @dag(
     dag_id="kaggle_to_gcs_bq",
     start_date=datetime(2019, 10, 1),
+    end_date=datetime(2020, 2, 1), # set limit for project purposes
     schedule="@monthly",
     catchup=True,
     tags=["kaggle", "gcs", "bigquery", "ecommerce"],
