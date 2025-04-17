@@ -25,19 +25,19 @@ Kaggle Dataset can be found [here](https://www.kaggle.com/datasets/mkechinov/eco
 A virtual machine is recommended with the following:
 - Python 3.9+
 - Terraform
-- AstroCLI (for Airflow)
+- Astro CLI (for Airflow)
 - Docker CLI/Desktop 
 - Google Service Account
 
 > [!IMPORTANT]  
 > In your Google Cloud Project, create a **Google Service Account** with the following roles:
-> - **BigQuery Admin**
-> - **Storage Admin**
-> - **Viewer**
+> - BigQuery Admi
+> - Storage Admin
+> - Viewer
 >
 > Download the account credentials and place it on your system (e.g. `/home/<your-username>/.keys/project_creds.json`)
 
-In the project root directory, you can use `./sudo setup.sh` to automatically install Docker, Terraform, and AstroCLI in your system.
+In the project root directory, you can use `./sudo setup.sh` to automatically install Docker, Terraform, and Astro CLI in your system.
 
 ### Setup Guidelines
 
@@ -50,7 +50,7 @@ terraform apply
 
 Modify `docker-compose.override.yml` and modify `Dockerfile` (to be continued...)
 
-Navigate to `airflow/` and start pipeline:
+Navigate to `airflow/` and start the orchestration using astronomer:
 ```
 astro dev start
 ```
