@@ -1,6 +1,7 @@
 FROM quay.io/astronomer/astro-runtime:12.7.1
 
 # !IMPORTANT Needs Modifying (check your project id and bucket name)
+# you can refer to your variables.tf file in terraform directory
 ENV GCS_BUCKET_NAME="zoomcamp-project-455714-ecom-bucket"
 ENV GOOGLE_CLOUD_PROJECT_ID="zoomcamp-project-455714"
 

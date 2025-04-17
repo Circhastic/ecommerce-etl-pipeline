@@ -3,13 +3,13 @@ services:
         volumes:
         # ! IMPORTANT Modify this mounting depending on where you put your gcloud credentials keyfile
         # example: - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
-        # replace this one
-        - ./include/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
+        # REPLACE this one
+        - /home/charles/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
     webserver:
         volumes:
-        # this one too
-        - ./include/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
+        # this one too...
+        - /home/charles/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
     triggerer:
         volumes:
-        # and this one
-        - ./include/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
+        # ...and lastly this one
+        - /home/charles/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
