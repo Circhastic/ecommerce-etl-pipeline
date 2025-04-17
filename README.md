@@ -3,10 +3,10 @@ An online flower shop, has been experiencing growth in website traffic and custo
 
 To support data-driven decision-making, their company needs a data pipeline that ingests, processes, and transforms this raw event data into clean, structured tables and dashboards. These insights should help answer key questions like:
 
-    - What are the most popular flower products?
-    - How do users behave before making a purchase?
-    - What time of day or day of the week has the highest sales volume?
-    - Which users are most engaged or likely to return?
+- What are the most popular flower products?
+- How do users behave before making a purchase?
+- What time of day or day of the week has the highest sales volume?
+- Which users are most engaged or likely to return?
 
 Kaggle Dataset can be found [here](https://www.kaggle.com/datasets/mkechinov/ecommerce-events-history-in-cosmetics-shop).
 
@@ -26,12 +26,12 @@ A virtual machine is recommended with the following:
 - Docker CLI/Desktop 
 - Google Service Account
 
-> 💡 **Note:**  
+> [!IMPORTANT]  
 > In your Google Cloud Project, create a **Google Service Account** with the following permissions:
 > - **BigQuery Admin**
 > - **Storage Admin**
 > - **Viewer**
-> Download the account credentials and place it on your system (e.g. `/home/<your-username>/.keys/project_creds.json)` 
+> Download the account credentials and place it on your system (e.g. `/home/<your-username>/.keys/project_creds.json`)
 
 In the project root directory, you can use `./sudo setup.sh` to automatically install Docker, Terraform, and AstroCLI in your system.
 
