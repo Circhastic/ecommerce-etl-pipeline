@@ -9,6 +9,6 @@ zoomcamp_project_dbt:
       method: service-account
       priority: interactive
       project: zoomcamp-project-455714
-      threads: 4
+      threads: 1
       type: bigquery
   target: dev

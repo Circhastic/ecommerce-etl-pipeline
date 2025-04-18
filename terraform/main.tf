@@ -8,7 +8,6 @@ terraform {
 }
 
 provider "google" {
-  # credentials = file(var.credentials) - I used GOOGLE_APPLICATION_CREDENTIALS env variable (default), you can use this if you want
   project     = var.project
   region      = var.region
 }

@@ -4,7 +4,8 @@ from pendulum import datetime
 
 from airflow.utils.dates import days_ago
 from airflow.datasets import Dataset
-from cosmos import DbtDag, ProjectConfig, ProfileConfig, ExecutionConfig
+from cosmos import DbtDag, ProjectConfig, ProfileConfig, ExecutionConfig, RenderConfig
+from cosmos.constants import TestBehavior
 
 BQ_PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT_ID", "zoomcamp-project-455714")
 BQ_DATASET = os.getenv("BQ_DATASET", "ecom_dataset")
@@ -44,4 +45,7 @@ my_cosmos_dag = DbtDag(
     operator_args={
         "install_deps": True,
     },
+    render_config=RenderConfig(
+        test_behavior=TestBehavior.AFTER_ALL,
+    )
 )
