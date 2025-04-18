@@ -31,26 +31,41 @@ A virtual machine is recommended with the following:
 
 > [!IMPORTANT]  
 > In your Google Cloud Project, create a **Google Service Account** with the following roles:
-> - BigQuery Admi
+> - BigQuery Admin
 > - Storage Admin
 > - Viewer
 >
 > Download the account credentials and place it on your system (e.g. `/home/<your-username>/.keys/project_creds.json`)
+> Then use that as a system environment variable using: 
+> ```
+> export GOOGLE_APPLICATION_CREDENTIALS="/home/<your-username>/.keys/project_creds.json"
+> ```
 
-In the project root directory, you can use `./sudo setup.sh` to automatically install Docker, Terraform, and Astro CLI in your system.
+In the project root directory, run `setup.sh` to automatically install Docker, Terraform, and Astro CLI in your system.
+```
+sudo ./setup.sh
+```
 
 ### Setup Guidelines
 
-After configuring your service account and terraform, navigate to `terraform/` directory and **modify** `variables.tf` config according to your project details
+1. After configuring your service account and terraform, navigate to `terraform/` directory and **modify** `variables.tf` config according to your project details
 
-Then apply your settings to create the necessary dataset and gcs bucket:
+2. Then apply your settings to create the necessary dataset and gcs bucket:
+
+For first time setting up, initizalize terraform.
+```
+terraform init
+```
+
 ```
 terraform apply
 ```
 
-Modify `docker-compose.override.yml` and modify `Dockerfile` (to be continued...)
+3. Modify `docker-compose.override.yml` and `Dockerfile` to properly mount your service account credentials to airflow container.
 
-Navigate to `airflow/` and start the orchestration using astronomer:
+4. Navigate to `airflow/` and put `kaggle.json` in `include/` directory.
+
+Start the orchestration using astronomer:
 ```
 astro dev start
 ```

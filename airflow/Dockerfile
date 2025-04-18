@@ -1,14 +1,16 @@
 FROM quay.io/astronomer/astro-runtime:12.7.1
 
-# !IMPORTANT Needs Modifying (check your project id and bucket name)
-# you can refer to your variables.tf file in terraform directory
+# !IMPORTANT NEEDS MODIFYING (check your project id and bucket name)
+# you can refer to your variables.tf file in terraform
 ENV GCS_BUCKET_NAME="zoomcamp-project-455714-ecom-bucket"
 ENV GOOGLE_CLOUD_PROJECT_ID="zoomcamp-project-455714"
 
-# No need to modify
+# should be the same as where you mounted your docker-compose.override.yml
 ENV GOOGLE_APPLICATION_CREDENTIALS=/usr/local/airflow/gcloud/project_creds.json
-ENV AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT='google-cloud-platform://'
 
+
+# NO NEED TO MODIFY
+ENV AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT='google-cloud-platform://'
 ENV KAGGLE_DATASET_PATH="mkechinov/ecommerce-events-history-in-cosmetics-shop"
 ENV GCS_DEST_PREFIX="ecommerce_events"
 ENV BQ_DATASET="ecom_dataset"

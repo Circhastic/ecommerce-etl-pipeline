@@ -1,9 +1,10 @@
 services:
+    # ! IMPORTANT Modify these depending on where you placed your gcloud credentials keyfile
+    # example:
+    # - /home/<your-username>/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
     scheduler:
         volumes:
-        # ! IMPORTANT Modify this mounting depending on where you put your gcloud credentials keyfile
-        # example: - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
-        # REPLACE this one
+        # replace this one
         - /home/charles/.keys/project_creds.json:/usr/local/airflow/gcloud/project_creds.json:rw
     webserver:
         volumes:
