@@ -1,16 +1,15 @@
 # eCommerce Events Data Pipeline and Analysis
-An online flower shop, has been experiencing growth in website traffic and customer orders. The business wants to better understand user behavior, optimize marketing efforts, and improve sales performance. However, their raw ecommerce event data—such as product views, cart additions, and completed purchases is collected by CDP (Customer Data Platform).
+An online cosmetic store, has been experiencing growth in website traffic and customer orders. The business wants to better understand user behavior, optimize marketing efforts, and improve sales performance. Their raw ecommerce event data such as product views, cart additions, and completed purchases are collected using SaaS.
 
 To support data-driven decision-making, their company needs a data pipeline that ingests, processes, and transforms this raw event data into clean, structured tables and dashboards. These insights should help answer key questions like:
 
 - What are the most popular flower products?
 - How do users behave before making a purchase?
 - What time of day or day of the week has the highest sales volume?
-- Which users are most engaged or likely to return?
 
 Kaggle Dataset can be found [here](https://www.kaggle.com/datasets/mkechinov/ecommerce-events-history-in-cosmetics-shop).
 
-## Technologies
+## Technology Stack
 - IaC: Terraform
 - Workflow Orchestration: Python/Airflow
 - Data Lake: Google Cloud Storage (GCS)
@@ -63,14 +62,14 @@ terraform apply
 
 3. In `airflow/`, modify `docker-compose.override.yml` and `Dockerfile` to properly mount your service account credentials to airflow container.
 
-4. Since this project will utilize Kaggle's API, [create a new kaggle api token](https://www.kaggle.com/discussions/getting-started/524433) for your credentials `kaggle.json`, and place it into `airflow/include/`
+4. Since this project will utilize Kaggle's API, [create a new kaggle api token](https://www.kaggle.com/discussions/getting-started/524433) for your credentials `kaggle.json`, and place it into `airflow/include/`.
 
 Start the orchestration using astronomer:
 ```
 sudo astro dev start
 ```
 
-5. Check the pipeline status on airflow in `localhost:8080` (username and password is **admin**)
+5. Check pipeline status on airflow ui in `localhost:8080` (username and password is **admin**)
 
 ## Analytics Dashboard
 ![dashboard screenshot](./images/dashboard.png)
