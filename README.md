@@ -13,7 +13,7 @@ Kaggle Dataset can be found [here](https://www.kaggle.com/datasets/mkechinov/eco
 - IaC: Terraform
 - Workflow Orchestration: Python/Airflow
 - Data Lake: Google Cloud Storage (GCS)
-- Data Warehouse: Google BigQuery + dbt
+- Data Warehouse: BigQuery + dbt
 - Data Visualization: Looker Studio
 
 ## Data Pipeline
@@ -22,7 +22,7 @@ Kaggle Dataset can be found [here](https://www.kaggle.com/datasets/mkechinov/eco
 ## Reproducibility
 ### Requirements
 A virtual machine is recommended with the following:
-- Python 3.9+
+- Python 3.x
 - Terraform
 - Astro CLI (for Airflow)
 - Docker CLI/Desktop 
@@ -47,29 +47,30 @@ sudo ./setup.sh
 
 ### Setup Guidelines
 
-1. After configuring your service account and terraform, navigate to `terraform/` and modify `variables.tf` config according to your project details
+1. After configuring your service account and terraform, navigate to `./terraform` and modify `variables.tf` config according to your project details
 
 2. Then apply your settings to create the necessary bigquery dataset and gcs bucket:
 
-For first time setting up, initialize terraform.
+For first time setting up, initialize terraform:
 ```
 terraform init
 ```
+Then apply:
 
 ```
 terraform apply
 ```
 
-3. In `airflow/`, modify `docker-compose.override.yml` and `Dockerfile` to properly mount your service account credentials to airflow container.
+3. In `./airflow`, modify `docker-compose.override.yml` and `Dockerfile` to properly mount your service account credentials to airflow container.
 
-4. Since this project will utilize Kaggle's API, [create a new kaggle api token](https://www.kaggle.com/discussions/getting-started/524433) for your credentials `kaggle.json`, and place it into `airflow/include/`.
+4. Since this project utilizes Kaggle's API, [create a new kaggle api token](https://www.kaggle.com/discussions/getting-started/524433) for your credentials `kaggle.json`, and place it into `./airflow/include/`.
 
 Start the orchestration using astronomer:
 ```
 sudo astro dev start
 ```
 
-5. Check pipeline status on airflow ui in `localhost:8080` (username and password is **admin**)
+5. Check pipeline status on airflow ui at `localhost:8080` (username and password is **admin**)
 
 ## Analytics Dashboard
 ![dashboard screenshot](./images/dashboard.png)
@@ -78,5 +79,5 @@ You can view the live dashboard [here](https://lookerstudio.google.com/reporting
 
 ## Future Improvements
 - makefile
-- more complete/detailed schema
+- more detailed schema
 - better metrics for dashboard
