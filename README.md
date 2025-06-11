@@ -24,7 +24,7 @@ Kaggle Dataset can be found [here](https://www.kaggle.com/datasets/mkechinov/eco
 A virtual machine is recommended with the following:
 - Python 3.x
 - Terraform
-- Astro CLI (for Airflow)
+- Astro CLI (for Airflow v2.x)
 - Docker CLI/Desktop 
 - Google Service Account
 
