@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: ecom_raw
-    database: "{{ env_var('GCP_PROJECT_ID', 'zoomcamp-project-455714') }}"
+    database: "{{ env_var('GOOGLE_CLOUD_PROJECT_ID', 'zoomcamp-project-455714') }}"
     schema: "{{ env_var('BQ_DATASET', 'ecom_dataset') }}"
     tables:
       - name: ecom_events
